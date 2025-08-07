@@ -38,7 +38,7 @@ npm install -g @expo/cli
 ### 2. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Godwin-Abin/mulearn-app.git
 cd mulearn-app
 ```
 
@@ -219,19 +219,6 @@ npx expo run:android
 - Install Android Studio
 - Set up Android SDK
 - Configure environment variables (ANDROID_HOME)
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-API_BASE_URL=your_api_url_here
-API_KEY=your_api_key_here
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
