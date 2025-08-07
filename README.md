@@ -10,7 +10,6 @@ A React Native mobile application built with Expo for the MuLearn platform, feat
 - **Responsive Design**: Clean, modern UI with proper styling and animations
 - **Tab-based Interface**: Dynamic content switching with smooth transitions
 
-
 ## 🛠️ Tech Stack
 
 - **React Native**: Cross-platform mobile development
