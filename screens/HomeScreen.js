@@ -1,70 +1,76 @@
 // HomeScreen.js
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import StaticHeader from '../components/StaticHeader';
 
 const HomeScreen = () => {
   return (
-    <ScrollView style={styles.container}>
-      {/* Welcome Banner */}
-      <View style={styles.bannerCard}>
-        <Text style={styles.bannerTitle}>Welcome G 👋</Text>
-        <Text style={styles.bannerText}>
-          This dashboard is being updated. Expect improvements and possible bugs. Thanks for your patience!
-        </Text>
-        <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.bannerButton}><Text style={styles.bannerButtonText}>Start Learning</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.bannerButtonOutline}><Text style={styles.bannerButtonOutlineText}>Join Learning</Text></TouchableOpacity>
+    <View style={styles.container}>
+      <StaticHeader title="Manager" />
+      <ScrollView style={styles.scrollContent}>
+        <View style={styles.bannerCard}>
+          <Text style={styles.bannerTitle}>Welcome User 👋</Text>
+          <Text style={styles.bannerText}>
+            This dashboard is being updated. Expect improvements and possible bugs. Thanks for your patience!
+          </Text>
+          <View style={styles.buttonRow}>
+            <TouchableOpacity style={styles.bannerButton}><Text style={styles.bannerButtonText}>Start Learning</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.bannerButtonOutline}><Text style={styles.bannerButtonOutlineText}>Join Learning</Text></TouchableOpacity>
+          </View>
         </View>
-      </View>
 
-      {/* Learning Circles */}
-      <Text style={styles.sectionTitle}>Learning Circles</Text>
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Product and analytics</Text>
-        <Text style={styles.cardSubtitle}>Product and analytics Hosted by Angel Rose</Text>
-        <View style={styles.badgeRow}>
-          <View style={styles.badge}><Text style={styles.badgeText}>Product Management</Text></View>
-          <View style={styles.badgeOutline}><Text style={styles.badgeOutlineText}>⚡ Offline</Text></View>
+        {/* Learning Circles */}
+        <Text style={styles.sectionTitle}>Learning Circles</Text>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Product and analytics</Text>
+          <Text style={styles.cardSubtitle}>Product and analytics Hosted by Angel Rose</Text>
+          <View style={styles.badgeRow}>
+            <View style={styles.badge}><Text style={styles.badgeText}>Product Management</Text></View>
+            <View style={styles.badgeOutline}><Text style={styles.badgeOutlineText}>⚡ Offline</Text></View>
+          </View>
+          <TouchableOpacity style={styles.viewDetails}><Text style={styles.viewDetailsText}>View Details</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.viewDetails}><Text style={styles.viewDetailsText}>View Details</Text></TouchableOpacity>
-      </View>
 
-      {/* Karma Earners */}
-      <Text style={styles.sectionTitle}>Karma Earners</Text>
-      <View style={[styles.karmaCard, { backgroundColor: '#E6F7F8' }]}>        
-        <Text style={styles.karmaTitle}>Highest Karma Earner (Student)</Text>
-        <Text style={styles.karmaText}>Ebin Reji</Text>
-        <Text style={styles.karmaText}>ebinreji@mulearn</Text>
-        <Text style={styles.karmaLink}>Karma : 17231</Text>
-      </View>
-      <View style={[styles.karmaCard, { backgroundColor: '#E9F3E9' }]}>        
-        <Text style={styles.karmaTitle}>Highest Karma Earner (College/Organisation)</Text>
-        <Text style={styles.karmaText}>IEEE</Text>
-        <Text style={styles.karmaLink}>Karma: 143617</Text>
-      </View>
+        {/* Karma Earners */}
+        <Text style={styles.sectionTitle}>Karma Earners</Text>
+        <View style={[styles.karmaCard, { backgroundColor: '#E6F7F8' }]}>        
+          <Text style={styles.karmaTitle}>Highest Karma Earner (Student)</Text>
+          <Text style={styles.karmaText}>Ebin Reji</Text>
+          <Text style={styles.karmaText}>ebinreji@mulearn</Text>
+          <Text style={styles.karmaLink}>Karma : 17231</Text>
+        </View>
+        <View style={[styles.karmaCard, { backgroundColor: '#E9F3E9' }]}>        
+          <Text style={styles.karmaTitle}>Highest Karma Earner (College/Organisation)</Text>
+          <Text style={styles.karmaText}>IEEE</Text>
+          <Text style={styles.karmaLink}>Karma: 143617</Text>
+        </View>
 
-      {/* Interest Groups */}
-      <View style={styles.interestHeaderRow}>
-        <Text style={styles.sectionTitle}>Interest groups in manager</Text>
-        <Text style={styles.showMore}>Show more &gt;</Text>
-      </View>
+        {/* Interest Groups */}
+        <View style={styles.interestHeaderRow}>
+          <Text style={styles.sectionTitle}>Interest groups in manager</Text>
+          <Text style={styles.showMore}>Show more &gt;</Text>
+        </View>
 
-      <View style={styles.interestCard}>
-        <Image source={require('../assets/product.webp')} style={styles.interestImage} />
-        <Text style={styles.interestText}>PRODUCT MANAGEMENT ➤</Text>
-      </View>
-      <View style={styles.interestCard}>
-        <Image source={require('../assets/marketing.webp')} style={styles.interestImage} />
-        <Text style={styles.interestText}>DIGITAL MARKETING ➤</Text>
-      </View>
-    </ScrollView>
+        <View style={styles.interestCard}>
+          <Image source={require('../assets/product.webp')} style={styles.interestImage} />
+          <Text style={styles.interestText}>PRODUCT MANAGEMENT ➤</Text>
+        </View>
+        <View style={styles.interestCard}>
+          <Image source={require('../assets/marketing.webp')} style={styles.interestImage} />
+          <Text style={styles.interestText}>DIGITAL MARKETING ➤</Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: { 
-    padding: 16, 
+    flex: 1,
     backgroundColor: '#f5f8ff',
+  },
+  scrollContent: {
+    padding: 16,
   },
   bannerCard: {
     backgroundColor: '#4264ff',
