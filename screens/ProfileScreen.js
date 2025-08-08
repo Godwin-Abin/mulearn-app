@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Switch } from 'react-native';
 import StaticHeader from '../components/StaticHeader';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ setIsLoggedIn }) => {
   const [activeTab, setActiveTab] = useState('basic');
   const [publicProfile, setPublicProfile] = useState(true);
   const [openToWork, setOpenToWork] = useState(false);
   const [openToGigs, setOpenToGigs] = useState(false);
+  const [selectedYear, setSelectedYear] = useState(2025); // State for selected year
 
   return (
     <View style={styles.container}>
-      <StaticHeader title="Profile" />
+      <StaticHeader title="Profile" setIsLoggedIn={setIsLoggedIn} />
       <ScrollView style={styles.scrollContent}>
         {/* Profile Card */}
         <View style={styles.profileCard}>
@@ -128,30 +129,59 @@ const ProfileScreen = () => {
              <View style={styles.section}>
                <Text style={styles.sectionTitle}>Activity Calendar</Text>
                <View style={styles.calendarContainer}>
-                 <View style={styles.calendarHeader}>
-                   <Text style={styles.calendarHeaderText}>Mon</Text>
-                   <Text style={styles.calendarHeaderText}>Wed</Text>
-                   <Text style={styles.calendarHeaderText}>Fri</Text>
-                 </View>
-                 <View style={styles.calendarGrid}>
-                   {['Jan', 'Feb', 'Mar', 'Apr', 'May'].map((month, index) => (
-                     <View key={index} style={styles.calendarColumn}>
-                       <Text style={styles.monthText}>{month}</Text>
-                       <View style={styles.dayGrid}>
-                         {[1, 2, 3].map((day) => (
-                           <View key={day} style={styles.dayCell} />
-                         ))}
-                       </View>
-                     </View>
+                 {/* Month Headers */}
+                 <View style={styles.monthHeaders}>
+                   {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, index) => (
+                     <Text key={index} style={styles.monthHeaderText}>{month}</Text>
                    ))}
                  </View>
-                 <View style={styles.yearSelector}>
-                   <Text style={styles.yearText}>2022</Text>
-                   <Text style={styles.yearText}>2023</Text>
-                   <Text style={styles.yearText}>2024</Text>
-                   <View style={styles.activeYear}>
-                     <Text style={styles.activeYearText}>2025</Text>
+                 
+                 {/* Calendar Grid */}
+                 <View style={styles.calendarGrid}>
+                   {/* Day Labels */}
+                   <View style={styles.dayLabels}>
+                     <Text style={styles.dayLabelText}>Mon</Text>
+                     <Text style={styles.dayLabelText}>Wed</Text>
+                     <Text style={styles.dayLabelText}>Fri</Text>
                    </View>
+                   
+                   {/* Activity Grid */}
+                   <View style={styles.activityGrid}>
+                     {Array.from({ length: 12 }, (_, monthIndex) => (
+                       <View key={monthIndex} style={styles.monthColumn}>
+                         {Array.from({ length: 3 }, (_, dayIndex) => (
+                           <View 
+                             key={dayIndex} 
+                             style={[
+                               styles.activityCell,
+                               monthIndex === 5 && dayIndex === 1 && styles.activeCell // June, Wednesday
+                             ]} 
+                           />
+                         ))}
+                       </View>
+                     ))}
+                   </View>
+                 </View>
+                 
+                 {/* Year Selector */}
+                 <View style={styles.yearSelector}>
+                   {[2022, 2023, 2024, 2025].map((year) => (
+                     <TouchableOpacity 
+                       key={year} 
+                       style={[
+                         styles.yearButton,
+                         selectedYear === year && styles.activeYearButton
+                       ]}
+                       onPress={() => setSelectedYear(year)}
+                     >
+                       <Text style={[
+                         styles.yearText,
+                         selectedYear === year && styles.activeYearText
+                       ]}>
+                         {year}
+                       </Text>
+                     </TouchableOpacity>
+                   ))}
                  </View>
                </View>
              </View>
@@ -677,54 +707,81 @@ const styles = StyleSheet.create({
   },
   calendarContainer: {
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
-  calendarHeader: {
+  monthHeaders: {
     flexDirection: 'row',
-    marginBottom: 10,
+    justifyContent: 'space-between',
+    marginBottom: 12,
+    width: '100%',
   },
-  calendarHeaderText: {
-    fontSize: 12,
+  monthHeaderText: {
+    fontSize: 11,
     color: '#666',
-    marginHorizontal: 15,
+    fontWeight: '500',
+    flex: 1,
+    textAlign: 'center',
   },
   calendarGrid: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 20,
+    width: '100%',
   },
-  calendarColumn: {
-    alignItems: 'center',
-    marginHorizontal: 8,
+  dayLabels: {
+    width: 35,
+    marginRight: 10,
+    justifyContent: 'space-between',
   },
-  monthText: {
-    fontSize: 12,
+  dayLabelText: {
+    fontSize: 11,
     color: '#666',
-    marginBottom: 8,
+    fontWeight: '500',
+    marginBottom: 12,
   },
-  dayGrid: {
-    gap: 2,
+  activityGrid: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  dayCell: {
-    width: 12,
-    height: 12,
-    backgroundColor: '#e5f3e5',
+  monthColumn: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  activityCell: {
+    width: 10,
+    height: 10,
+    backgroundColor: '#e8f5e8',
     borderRadius: 2,
+    marginBottom: 6,
+    borderWidth: 0.5,
+    borderColor: '#d0e8d0',
+  },
+  activeCell: {
+    backgroundColor: '#4264ff',
+    borderColor: '#4264ff',
   },
   yearSelector: {
     flexDirection: 'row',
-    gap: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 10,
+  },
+  yearButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
   },
   yearText: {
-    fontSize: 12,
-    color: '#22c55e',
+    fontSize: 13,
+    color: '#4264ff',
+    fontWeight: '500',
   },
-  activeYear: {
-    backgroundColor: '#22c55e',
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
+  activeYearButton: {
+    backgroundColor: '#4264ff',
   },
   activeYearText: {
-    fontSize: 12,
     color: '#fff',
     fontWeight: 'bold',
   },

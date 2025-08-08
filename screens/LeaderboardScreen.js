@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import StaticHeader from '../components/StaticHeader';
 
-const LeaderboardScreen = () => {
+const LeaderboardScreen = ({ setIsLoggedIn }) => {
   const [activeTab, setActiveTab] = useState('monthly');
   const [activeFilter, setActiveFilter] = useState('student');
   const [showDropdown, setShowDropdown] = useState(false);
@@ -283,7 +283,7 @@ const LeaderboardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StaticHeader title="Leaderboard" />
+      <StaticHeader title="Leaderboard" setIsLoggedIn={setIsLoggedIn} />
       <ScrollView style={styles.scrollContent}>
         {/* Main Container */}
         <View style={styles.mainContainer}>

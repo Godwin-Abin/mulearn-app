@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-export default function LoginScreen({ navigation }) {
+export default function OTPScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
 

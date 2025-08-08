@@ -3,10 +3,10 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import StaticHeader from '../components/StaticHeader';
 
-const HomeScreen = () => {
+const HomeScreen = ({ setIsLoggedIn }) => {
   return (
     <View style={styles.container}>
-      <StaticHeader title="Manager" />
+      <StaticHeader title="Manager" setIsLoggedIn={setIsLoggedIn} />
       <ScrollView style={styles.scrollContent}>
         <View style={styles.bannerCard}>
           <Text style={styles.bannerTitle}>Welcome User 👋</Text>
